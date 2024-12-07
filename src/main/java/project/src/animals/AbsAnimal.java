@@ -1,6 +1,6 @@
-package project.src.Animals;
+package project.src.animals;
 
-public class AbsAnimal {
+public abstract class AbsAnimal {
     private String name;
     private Integer age;
     private Double weight;
@@ -38,19 +38,19 @@ public class AbsAnimal {
         this.color = color;
     }
 
-    void say() {
+    public void say() {
         System.out.println("I'm talking!");
     }
 
-    void go() {
+    public void go() {
         System.out.println("I'm moving!");
     }
 
-    void drink() {
+    public void drink() {
         System.out.println("I'm drinking!");
     }
 
-    void eat() {
+    public void eat() {
         System.out.println("I'm eating!");
     }
 

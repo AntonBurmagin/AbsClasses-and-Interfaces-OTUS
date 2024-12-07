@@ -1,16 +1,21 @@
 package project.src;
-import project.src.Animals.AbsAnimal;
-import java.util.Scanner;
+import project.src.animals.AbsAnimal;
+import project.src.data.AnimalTypes;
+import project.src.factory.Factory;
 
 public class Main {
     public static void main(String[] args) {
+        Factory factory = new Factory();
+//        AbsAnimal animal = factory.create(AnimalTypes.DOG);
+//        animal.setName("Bob");
+//        animal.setAge(1);
+//        animal.setWeight(18.5);
+//        animal.setColor("Pink");
+//        System.out.println(animal.toString());
+//        animal.say();
 
-        AbsAnimal animal = new AbsAnimal();
-        animal.setName("Bob");
-        animal.setAge(1);
-        animal.setWeight(18.5);
-        animal.setColor("Pink");
-        System.out.println(animal.toString());
+
+
         String order;
         Order orderType = null;
 //      System.out.println(orderType.EXIT.toString());

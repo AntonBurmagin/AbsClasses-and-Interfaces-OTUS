@@ -1,10 +1,10 @@
-package project.src.Animals.Birds;
+package project.src.animals.birds;
 
-import project.src.Animals.AbsAnimal;
+import project.src.animals.AbsAnimal;
 
 public class Duck extends AbsAnimal implements IFlying {
 
-    void say() {
+    public void say() {
         System.out.println("QUACK!");
     }
 
