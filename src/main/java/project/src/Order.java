@@ -1,4 +1,4 @@
-package org.example;
+package project.src;
 
 public enum Order {
     ADD,

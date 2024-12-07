@@ -1,6 +1,8 @@
-package org.example;
+package project.src.Animals.Birds;
 
-public class Duck extends Animal implements Flying {
+import project.src.Animals.AbsAnimal;
+
+public class Duck extends AbsAnimal implements IFlying {
 
     void say() {
         System.out.println("QUACK!");

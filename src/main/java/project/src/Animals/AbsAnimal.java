@@ -1,9 +1,9 @@
-package org.example;
+package project.src.Animals;
 
-public class Animal {
+public class AbsAnimal {
     private String name;
     private Integer age;
-    private Float weight;
+    private Double weight;
     private String color;
 
     public String getName() {
@@ -14,7 +14,7 @@ public class Animal {
         return age;
     }
 
-    public Float getWeight() {
+    public Double getWeight() {
         return weight;
     }
 
@@ -30,7 +30,7 @@ public class Animal {
         this.age = age;
     }
 
-    public void setWeight(Float weight) {
+    public void setWeight(Double weight) {
         this.weight = weight;
     }
 
@@ -56,7 +56,9 @@ public class Animal {
 
     @Override
     public String toString(){
-        return ("Hello! My name is " + name + ", I'm " + age +
-                " years old. My weight is about " + weight + "kg, and I'm " + color);
+        String year = (age > 1 ? "years" : "year");
+        return String.format("Hello! My name is %s, I'm %d %s old. " +
+                "My weight is about %s kg, and I'm %s", name, age, year, weight, color);
     }
+
 }
