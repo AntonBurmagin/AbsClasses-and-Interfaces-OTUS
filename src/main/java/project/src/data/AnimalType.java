@@ -1,6 +1,6 @@
 package project.src.data;
 
-public enum AnimalTypes {
+public enum AnimalType {
     CAT,
     DOG,
     DUCK

@@ -1,12 +1,19 @@
 package project.src.verifier;
 
-import project.src.Order;
+import project.src.data.AnimalType;
 import project.src.data.ColorType;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Verifier {
+    public boolean animalTypeVerifier(String animalType) {
+        if (AnimalType.values().toString().contains(animalType.trim().toUpperCase())) {
+            return true;
+        }
+        System.out.println("Incorrect animal type!");
+        return false;
+    }
+
     public boolean colorVerifier(String color) {
         if (ColorType.values().toString().contains(color.trim().toUpperCase())) {
             return true;
