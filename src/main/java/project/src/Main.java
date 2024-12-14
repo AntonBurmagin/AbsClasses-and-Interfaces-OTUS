@@ -1,29 +1,26 @@
 package project.src;
 import project.src.animals.AbsAnimal;
 import project.src.data.AnimalType;
+import project.src.data.ColorType;
 import project.src.data.OrderType;
 import project.src.factory.Factory;
 import project.src.verifier.Verifier;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Factory factory = new Factory();
         ArrayList<AbsAnimal> animal = new ArrayList<AbsAnimal>();
-        AbsAnimal pet1 = factory.create(AnimalType.DOG);
-
         String order;
-        OrderType orderType = null;
-        //AbsAnimal animal = factory.create(AnimalTypes.DOG);
 
         while (true) {
             System.out.println("What's your command " + Arrays.toString(OrderType.values()));
             Scanner input = new Scanner(System.in);
             order = input.nextLine().trim().toUpperCase();
-            System.out.println(order);
             if (order.equals(OrderType.EXIT.toString())) {
                 System.out.println("Got exit. Goodbye!");
                 break;
@@ -31,53 +28,44 @@ public class Main {
                 Verifier verifier = new Verifier();
                 String type;
                 String name;
-                Integer age;
-                Double weight;
+                String age;
+                String weight;
                 String color;
-                while (true) {
+
+                do {
                     System.out.println("Input animal type " + Arrays.toString(AnimalType.values()));
-                    type = input.nextLine().trim().toUpperCase();
-                    if (verifier.animalTypeVerifier(order))
-                        break;
-                }
+                    type = input.nextLine().toUpperCase();
+                } while (!verifier.animalTypeVerifier(type));
 
-                while (true) {
-                    System.out.printf("Input %s name:\n", type);
+                do {
+                    Verifier.commonPrintf("name", type);
                     name = input.nextLine().trim();
-                    if (verifier.nameVerifier(name))
-                        break;
-                }
+                } while (!verifier.nameVerifier(name));
 
-                while (true) {
-                    System.out.printf("Input %s age:\n", type);
-                    age = Integer.valueOf(input.nextLine().trim());
-                    if (verifier.ageVerifier(age))
-                        break;
-                }
+                do {
+                    Verifier.commonPrintf("age", type);
+                    age = input.nextLine().trim();
+                } while (!verifier.ageVerifier(age));
 
-                while (true) {
-                    System.out.printf("Input %s weight:\n", type);
-                    weight = Double.valueOf(input.nextLine().trim());
-                    if (verifier.weightVerifier(weight))
-                        break;
-                }
+                do {
+                    Verifier.commonPrintf("weight", type);
+                    weight = input.nextLine().trim();
+                } while (!verifier.weightVerifier(weight));
 
-                while (true) {
-                    System.out.printf("Input %s color:\n", type);
+                do {
+                    Verifier.commonPrintf("color", type);
+                    System.out.println("One of these "+ Arrays.toString(ColorType.values()));
                     color = input.nextLine().trim();
-                    if (verifier.colorVerifier(color))
-                        break;
-                }
+                } while (!verifier.colorVerifier(color));
 
                 AbsAnimal newbornAnimal = factory.create(AnimalType.valueOf(type));
                 newbornAnimal.setName(name);
-                newbornAnimal.setAge(age);
-                newbornAnimal.setWeight(weight);
+                newbornAnimal.setAge(Integer.valueOf(age));
+                newbornAnimal.setWeight(Double.valueOf(weight));
                 newbornAnimal.setColor(color);
+
                 animal.addLast(newbornAnimal);
                 newbornAnimal.say();
-
-
 
             } else if (order.equals(OrderType.LIST.toString())) {
                 if (animal.isEmpty()) {
