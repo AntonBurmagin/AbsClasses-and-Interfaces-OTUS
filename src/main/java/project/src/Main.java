@@ -8,7 +8,6 @@ import project.src.verifier.Verifier;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -22,7 +21,7 @@ public class Main {
             Scanner input = new Scanner(System.in);
             order = input.nextLine().trim().toUpperCase();
             if (order.equals(OrderType.EXIT.toString())) {
-                System.out.println("Got exit. Goodbye!");
+                System.out.println("Goodbye!");
                 break;
             } else if (order.equals(OrderType.ADD.toString())) {
                 Verifier verifier = new Verifier();
@@ -38,22 +37,22 @@ public class Main {
                 } while (!verifier.animalTypeVerifier(type));
 
                 do {
-                    Verifier.commonPrintf("name", type);
+                    verifier.commonPrintf("name", type);
                     name = input.nextLine().trim();
                 } while (!verifier.nameVerifier(name));
 
                 do {
-                    Verifier.commonPrintf("age", type);
+                    verifier.commonPrintf("age", type);
                     age = input.nextLine().trim();
                 } while (!verifier.ageVerifier(age));
 
                 do {
-                    Verifier.commonPrintf("weight", type);
+                    verifier.commonPrintf("weight", type);
                     weight = input.nextLine().trim();
                 } while (!verifier.weightVerifier(weight));
 
                 do {
-                    Verifier.commonPrintf("color", type);
+                    verifier.commonPrintf("color", type);
                     System.out.println("One of these "+ Arrays.toString(ColorType.values()));
                     color = input.nextLine().trim();
                 } while (!verifier.colorVerifier(color));

@@ -57,7 +57,7 @@ public class Verifier {
         return false;
     }
 
-    public static void commonPrintf(String characteristic, String type) {
+    public void commonPrintf(String characteristic, String type) {
             System.out.printf("Input %s for a new %s:\n",characteristic, type);
     }
 

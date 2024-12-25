@@ -56,9 +56,9 @@ public abstract class AbsAnimal {
 
     @Override
     public String toString(){
-        String year = (age > 1 ? "years" : "year");
+        String yearFormat = (age > 1 ? "years" : "year");
         return String.format("Hello! My name is %s, I'm %d %s old. " +
-                "My weight is about %s kg, and I'm %s", name, age, year, weight, color);
+                "My weight is about %s kg, and I'm %s", name, age, yearFormat, weight, color);
     }
 
 }
