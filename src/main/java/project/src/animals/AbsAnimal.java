@@ -1,10 +1,12 @@
 package project.src.animals;
 
+import project.src.data.ColorType;
+
 public abstract class AbsAnimal {
     private String name;
     private Integer age;
     private Double weight;
-    private String color;
+    private ColorType color;
 
     public String getName() {
         return name;
@@ -19,7 +21,7 @@ public abstract class AbsAnimal {
     }
 
     public String getColor() {
-        return color;
+        return color.getName();
     }
 
     public void setName(String name) {
@@ -35,7 +37,7 @@ public abstract class AbsAnimal {
     }
 
     public void setColor(String color) {
-        this.color = color;
+        this.color = ColorType.valueOf(color.toUpperCase());
     }
 
     public void say() {
@@ -56,9 +58,16 @@ public abstract class AbsAnimal {
 
     @Override
     public String toString(){
-        String yearFormat = (age > 1 ? "years" : "year");
-        return String.format("Hello! My name is %s, I'm %d %s old. " +
-                "My weight is about %s kg, and I'm %s", name, age, yearFormat, weight, color);
+        String yearFormat;
+        if (age % 10 == 0 || age % 10 >= 5 || age / 10 == 1) {
+            yearFormat = "лет";
+        } else if (age % 10 == 1) {
+            yearFormat = "год";
+        } else {
+            yearFormat = "года";
+        }
+        return String.format("Привет! Меня зовут %s, мне %d %s, " +
+                "я вешу %s кг, мой цвет - %s", name, age, yearFormat, weight, color.getName());
     }
 
 }

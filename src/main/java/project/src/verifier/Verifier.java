@@ -10,7 +10,8 @@ public class Verifier {
             if (t.toString().equals(type))
                 return true;
         }
-            return false;
+        System.out.println("Incorrect animal type!");
+        return false;
     }
 
     public boolean nameVerifier(String name) {
@@ -50,8 +51,9 @@ public class Verifier {
 
     public boolean colorVerifier(String color) {
         for (ColorType t : ColorType.values()) {
-            if (t.toString().equals(color.toUpperCase()))
+            if (t.toString().equals(color.toUpperCase())) {
                 return true;
+            }
         }
         System.out.println("Incorrect color! Choose one of " + Arrays.toString(ColorType.values()));
         return false;
