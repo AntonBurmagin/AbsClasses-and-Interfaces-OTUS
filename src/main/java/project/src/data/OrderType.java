@@ -5,7 +5,10 @@ import java.util.ArrayList;
 public enum OrderType {
     ADD,
     LIST,
-    EXIT;
+    EXIT,
+    CREATE,
+    UPDATE,
+    CLEAR;
 
     public static String getAvailableOrders(){
         ArrayList<String> result = new ArrayList<String>();
