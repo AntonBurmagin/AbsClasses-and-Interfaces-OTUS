@@ -7,4 +7,5 @@ public interface IDBConnector {
     void execute(String sqlRequest) throws SQLException;
     ResultSet executeQuery(String sqlRequest) throws SQLException;
     void close() throws SQLException;
+    String getDBName();
 }

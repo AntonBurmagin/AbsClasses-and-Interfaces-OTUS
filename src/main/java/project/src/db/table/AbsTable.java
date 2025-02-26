@@ -7,7 +7,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.List;
 
-public class AbsTable implements ITable{
+abstract public class AbsTable implements ITable{
     protected IDBConnector connector;
     private String tableName = "";
 
@@ -15,7 +15,7 @@ public class AbsTable implements ITable{
         tableName = name;
     };
 
-
+    public abstract boolean exist() throws SQLException;
 
     @Override
     public void create(List<String> columns) throws SQLException {
@@ -25,7 +25,7 @@ public class AbsTable implements ITable{
 
     @Override
     public void delete() throws SQLException {
-        connector.execute(String.format("drop table if exist %s;", tableName));
+        connector.execute(String.format("drop table if exists %s;", tableName));
     }
 
     @Override

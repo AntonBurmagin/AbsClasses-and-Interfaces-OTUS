@@ -20,9 +20,12 @@ public class Main {
         Factory factory = new Factory();
         ArrayList<AbsAnimal> animal = new ArrayList<AbsAnimal>();
         String order;
+
         MySQLConnector connector = new MySQLConnector();
         AnimalTable table = new AnimalTable(connector);
-        table.exist();
+        if (!table.exist())
+            table.create(table.getColumns());
+
 
 //        String query = "SELECT * from animal;";
 
@@ -94,7 +97,7 @@ public class Main {
                         AbsAnimal newbornAnimal = factory.create(AnimalType.valueOf(type));
                         newbornAnimal.setName(name);
                         newbornAnimal.setAge(Integer.valueOf(age));
-                        newbornAnimal.setWeight(Double.valueOf(weight));
+                        newbornAnimal.setWeight(Float.valueOf(weight));
                         newbornAnimal.setColor(color);
 
                         animal.addLast(newbornAnimal);

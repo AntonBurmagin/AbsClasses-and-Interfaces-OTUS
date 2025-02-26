@@ -1,26 +1,33 @@
 package project.src.db.table;
 
 import project.src.animals.AbsAnimal;
+import project.src.data.ColorType;
 import project.src.db.dbconnectors.MySQLConnector;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class AnimalTable extends AbsTable {
-    private static final String NAME = "animals";
+    private static final String NAME = "animals313";
+    private final String []columns = {"id INT PRIMARY KEY",
+                                        "name VARCHAR(255)",
+                                        "age INT",
+                                        "weight FLOAT",
+                                        "color VARCHAR(50)",
+                                        "type VARCHAR(50)"};
+
 
     public AnimalTable(MySQLConnector conn) throws SQLException {
         super(NAME);
         connector = conn;
     }
 
-    //подумать, как реализовать в AbsTable!!!
     public boolean exist() throws SQLException {
         ResultSet set = connector.executeQuery("SHOW TABLES;");
-        MySQLConnector mySQLConnector = new MySQLConnector();
-        String columnName = String.format("Tables_in_%s", mySQLConnector.getDBName());
+        String columnName = String.format("Tables_in_%s", connector.getDBName());
         while (set.next()) {
             if (set.getString(columnName).equals(NAME))
                 return true;
@@ -39,11 +46,10 @@ public class AnimalTable extends AbsTable {
         connector.execute("Select * FROM animals;");
     }
 
+    public List<String> getColumns(){
+        return Arrays.asList(columns);
+    }
 
-//    @Override
-//    public void create(List<String> columns) throws IOException {
-//        super.create(columns);
-//    }
 //
 //    @Override
 //    public void delete() throws IOException {

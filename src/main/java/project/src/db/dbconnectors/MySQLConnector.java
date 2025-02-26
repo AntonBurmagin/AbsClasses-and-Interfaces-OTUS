@@ -35,7 +35,7 @@ public class MySQLConnector implements IDBConnector {
     public void execute(String sqlRequest) throws SQLException {
         open();
         try{
-            statement.executeQuery(sqlRequest);
+            statement.execute(sqlRequest);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

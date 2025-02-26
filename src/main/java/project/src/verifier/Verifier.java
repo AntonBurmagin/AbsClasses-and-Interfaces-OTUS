@@ -39,13 +39,13 @@ public class Verifier {
 
     public boolean weightVerifier(String weight) {
         try {
-            double result = Double.parseDouble(weight);
+            float result = Float.parseFloat(weight);
             if (result > 0 && result < 156)
                 return true;
-        } catch (NumberFormatException ageException) {
+        } catch (NumberFormatException weightException) {
             System.out.println("Catch NumberFormatException");
         }
-        System.out.println("Incorrect weight format! It must be Double from 0+ to 155 kg (world record for dogs)!");
+        System.out.println("Incorrect weight format! It must be Float from 0+ to 155 kg (world record for dogs)!");
         return false;
     }
 

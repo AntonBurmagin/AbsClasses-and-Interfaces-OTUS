@@ -5,7 +5,7 @@ import project.src.data.ColorType;
 public abstract class AbsAnimal {
     private String name;
     private Integer age;
-    private Double weight;
+    private Float weight;
     private ColorType color;
 
     public String getName() {
@@ -16,7 +16,7 @@ public abstract class AbsAnimal {
         return age;
     }
 
-    public Double getWeight() {
+    public Float getWeight() {
         return weight;
     }
 
@@ -32,7 +32,7 @@ public abstract class AbsAnimal {
         this.age = age;
     }
 
-    public void setWeight(Double weight) {
+    public void setWeight(Float weight) {
         this.weight = weight;
     }
 
