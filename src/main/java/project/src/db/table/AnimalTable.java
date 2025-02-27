@@ -45,11 +45,6 @@ public class AnimalTable extends AbsTable {
         return !connector.executeQuery("SELECT * FROM animals313 LIMIT 1;").next();
     }
 
-    @Override
-    public void update(int id, AbsAnimal correctedAnimal) throws SQLException {
-
-    }
-
 
     public void insert(AbsAnimal newbornAnimal, AnimalType type) throws SQLException {
         String columnsString = String.join(",", columnsNamesWithoutId);

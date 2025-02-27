@@ -13,5 +13,4 @@ public interface ITable {
     boolean exist() throws SQLException;
     void clear() throws SQLException;
     boolean isEmpty() throws SQLException;
-    void update(int id, AbsAnimal correctedAnimal) throws SQLException;
 }

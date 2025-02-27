@@ -33,7 +33,6 @@ abstract public class AbsTable implements ITable{
         String col = columns.isEmpty() ? "*" : String.join(",", columns);
         String predicates = predicatesIn.length == 0 ? ""
                 : String.format("where %s", String.join("and", predicatesIn));
-        System.out.println(String.format("SELECT %s FROM %s %s;", col, tableName, predicates));
         return connector.executeQuery(String.format("SELECT %s FROM %s %s;", col, tableName, predicates));
     }
 

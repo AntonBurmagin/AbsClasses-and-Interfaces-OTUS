@@ -26,10 +26,6 @@ public class Main {
         if (!table.exist())
             table.create(table.getInitColumns());
 
-//        AbsAnimal bob = factory.create(AnimalType.DOG);
-//        bob.setColor("black");
-//        System.out.println(bob.getColor());
-
 
         while (true) {
             System.out.printf("What's your command (%s)\n", OrderType.getAvailableOrders());
@@ -138,10 +134,6 @@ public class Main {
                     case ("CLEAR"):
                         table.clear();
                         break;
-
-
-
-
 
 
                     default:
