@@ -15,8 +15,9 @@ public class MySQLConnector implements IDBConnector {
                 + "/src/main/resources/mysql_settings.properties");
     }
 
-    public void open() {
-        if(connection == null) {
+    public void open() throws SQLException {
+        //без проверки на closed - connection и statement закрыты после первого добавления животного
+        if(connection == null || connection.isClosed()) {
             try {
                 connection = DriverManager.getConnection(String.format("%s/%s",settings.get("url"), settings.get("dbname")),
                         settings.get("username"), settings.get("password"));

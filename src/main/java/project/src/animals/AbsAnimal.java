@@ -21,7 +21,7 @@ public abstract class AbsAnimal {
     }
 
     public String getColor() {
-        return color.getName();
+        return color.toString();
     }
 
     public void setName(String name) {
@@ -54,6 +54,11 @@ public abstract class AbsAnimal {
 
     public void eat() {
         System.out.println("I'm eating!");
+    }
+
+    //    {"id", "name", "age", "weight", "color", "type"}
+    public String getAll() {
+        return String.format("'%s', %s, %s, '%s'", name, age, weight, color);
     }
 
     @Override

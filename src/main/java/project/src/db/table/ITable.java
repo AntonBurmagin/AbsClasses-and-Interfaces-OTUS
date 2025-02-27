@@ -1,13 +1,17 @@
 package project.src.db.table;
 
-import java.io.IOException;
+import project.src.animals.AbsAnimal;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 public interface ITable {
-    public void create(List<String> columns) throws SQLException;
-    public void delete() throws SQLException;
+    void create(List<String> columns) throws SQLException;
+    void drop() throws SQLException;
     ResultSet select(List<String> columns, String... predicatesIn) throws SQLException;
-    public boolean exist() throws SQLException;
+    boolean exist() throws SQLException;
+    void clear() throws SQLException;
+    boolean isEmpty() throws SQLException;
+    void update(int id, AbsAnimal correctedAnimal) throws SQLException;
 }

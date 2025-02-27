@@ -9,6 +9,7 @@ import project.src.factory.Factory;
 import project.src.verifier.Verifier;
 
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,36 +17,18 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class Main {
-    public static void main(String[] args) throws IOException, SQLException {
+    public static void main(String[] args) throws SQLException {
         Factory factory = new Factory();
-        ArrayList<AbsAnimal> animal = new ArrayList<AbsAnimal>();
         String order;
 
         MySQLConnector connector = new MySQLConnector();
         AnimalTable table = new AnimalTable(connector);
         if (!table.exist())
-            table.create(table.getColumns());
+            table.create(table.getInitColumns());
 
-
-//        String query = "SELECT * from animal;";
-
-        //выполнить запрос
-//        ResultSet resSet = connector.executeQuery(query);
-        // вывести заголовки таблицы на экран
-//        System.out.printf("%-5s %-10s %-5s %-8s %-10s %-10s%n", "id", "color", "name", "weight", "type", "age");
-//        System.out.println("---------------------------------------------------");
-
-        // вывести ответ от БД в виде таблицы
-//        while (resSet.next()) {
-//            System.out.printf("%-5s %-10s %-5s %-8s %-10s %-10s%n",
-//                    resSet.getString("id"),
-//                    resSet.getString("color"),
-//                    resSet.getString("name"),
-//                    resSet.getString("weight"),
-//                    resSet.getString("type"),
-//                    resSet.getString("age"));
-//        }
-
+//        AbsAnimal bob = factory.create(AnimalType.DOG);
+//        bob.setColor("black");
+//        System.out.println(bob.getColor());
 
 
         while (true) {
@@ -53,13 +36,20 @@ public class Main {
             Scanner input = new Scanner(System.in);
             order = input.nextLine().trim().toUpperCase();
             try{
+                String id = "";
+                Verifier verifier = new Verifier();
                 switch (order) {
                     case ("EXIT"):
                         System.out.println("Goodbye!");
                         System.exit(0);
 
+                    case ("UPDATE"):
+                        do {
+                            System.out.printf("Input animal id you want to update\n");
+                            id = input.nextLine().toUpperCase();
+                        } while (!verifier.idVerifier(id));
+
                     case ("ADD"):
-                        Verifier verifier = new Verifier();
                         String type;
                         String name;
                         String age;
@@ -100,19 +90,59 @@ public class Main {
                         newbornAnimal.setWeight(Float.valueOf(weight));
                         newbornAnimal.setColor(color);
 
-                        animal.addLast(newbornAnimal);
-                        newbornAnimal.say();
+                        if (order.equals("UPDATE")) {
+                            table.update(Integer.parseInt(id), newbornAnimal, AnimalType.valueOf(type));
+                            break;
+                        }
+
+
+                        table.insert(newbornAnimal, AnimalType.valueOf(type));
                         break;
 
+
                     case ("LIST"):
-                        if (animal.isEmpty()) {
+                        if (table.isEmpty()) {
                             System.out.println("Your list is empty! Try " + OrderType.ADD.toString() + " first!");
                             continue;
                         }
-                        for (AbsAnimal iterator : animal) {
+
+                        System.out.printf("Input animal type or anything else if type doesn't matter(%s)\n",
+                                Arrays.stream(AnimalType.values()).map(command -> command.name().toLowerCase()).collect(Collectors.joining("/")));
+                        String selectedType = input.nextLine().toUpperCase();
+
+                        ArrayList<String> predicatesList = new ArrayList<>();
+                        if (AnimalType.isAnimalType(selectedType))
+                            predicatesList.add(String.format("type='%s'",selectedType.toLowerCase()));
+
+                        String []predicates = new String[predicatesList.size()];
+                        predicates = predicatesList.toArray(predicates);
+
+                        ResultSet requestResult = table.select(table.getColumnsNames(), predicates);
+
+                        ArrayList<AbsAnimal> animals = new ArrayList<>();
+                        while(requestResult.next()) {
+                            AbsAnimal nextAnimal = factory.create(AnimalType.valueOf(requestResult.getString("type").toUpperCase()));
+                            nextAnimal.setName(requestResult.getString("name"));
+                            nextAnimal.setAge(Integer.valueOf(requestResult.getString("age")));
+                            nextAnimal.setWeight(Float.valueOf(requestResult.getString("weight")));
+                            nextAnimal.setColor(requestResult.getString("color"));
+                            animals.add(nextAnimal);
+                        }
+
+                        for (AbsAnimal iterator : animals) {
                             System.out.println(iterator.toString());
                         }
                         break;
+
+
+                    case ("CLEAR"):
+                        table.clear();
+                        break;
+
+
+
+
+
 
                     default:
                         System.out.printf("%s command doesn't exist!\n", order);

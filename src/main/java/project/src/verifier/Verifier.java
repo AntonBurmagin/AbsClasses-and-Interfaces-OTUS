@@ -63,5 +63,17 @@ public class Verifier {
             System.out.printf("Input %s for a new %s:\n",characteristic, type);
     }
 
+    public boolean idVerifier(String id) {
+        try {
+            int result = Integer.parseInt(id);
+            if (result > 0)
+                return true;
+        } catch (NumberFormatException ageException) {
+            System.out.println("Catch NumberFormatException");
+        }
+        System.out.println("Incorrect id format! It must be Integer and bigger than 0!");
+        return false;
+    }
+
 
 }
